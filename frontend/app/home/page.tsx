@@ -4,8 +4,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "../../components/Footer";
- import NavigationLinks from "../../components/NavigationLinks";
+import NavigationLinks from "../../components/NavigationLinks";
+import ThemeToggle from "../../components/theme/ThemeToggle";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   Sheet,
   SheetContent,
@@ -14,64 +21,73 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { CircleUserRound, Menu, ShoppingBag } from "lucide-react";
+import {
+  CircleCheckBig,
+  CircleUserRound,
+  Clock,
+  Heart,
+  Menu,
+  ShoppingBag,
+  Truck,
+} from "lucide-react";
+import { formatCurrency } from "@/utils/format";
 
 const products = [
   {
     id: 1,
-    name: "Leather Backpack",
+    name: "Mochila de viagem",
     price: 89.99,
     image: "https://placehold.co/600x400/indigo/white?text=Backpack",
-    category: "Accessories",
+    category: "Acessórios",
   },
   {
     id: 2,
-    name: "Wireless Headphones",
+    name: "Fone de ouvido sem fio",
     price: 129.99,
     image: "https://placehold.co/600x400/indigo/white?text=Headphones",
-    category: "Electronics",
+    category: "Eletrônicos",
   },
   {
     id: 3,
     name: "Smart Watch",
     price: 199.99,
     image: "https://placehold.co/600x400/indigo/white?text=SmartWatch",
-    category: "Electronics",
+    category: "Eletrônicos",
   },
   {
     id: 4,
-    name: "Running Shoes",
+    name: "Tênis de corrida",
     price: 79.99,
     image: "https://placehold.co/600x400/indigo/white?text=Shoes",
-    category: "Footwear",
+    category: "Calçados",
   },
   {
     id: 5,
-    name: "Cotton T-Shirt",
+    name: "Camiseta",
     price: 24.99,
     image: "https://placehold.co/600x400/indigo/white?text=TShirt",
-    category: "Clothing",
+    category: "Moda",
   },
   {
     id: 6,
-    name: "Sunglasses",
+    name: "Óculos de Sol",
     price: 59.99,
     image: "https://placehold.co/600x400/indigo/white?text=Sunglasses",
-    category: "Accessories",
+    category: "Acessórios",
   },
   {
     id: 7,
-    name: "Desk Lamp",
+    name: "Abajur de mesa",
     price: 39.99,
     image: "https://placehold.co/600x400/indigo/white?text=Lamp",
-    category: "Home",
+    category: "Lar",
   },
   {
     id: 8,
-    name: "Denim Jacket",
+    name: "Jaqueta de couro",
     price: 69.99,
     image: "https://placehold.co/600x400/indigo/white?text=Jacket",
-    category: "Clothing",
+    category: "Moda",
   },
 ];
 
@@ -99,14 +115,14 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-10">
+      <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0 flex items-center">
-                <span className="text-2xl font-bold text-indigo-600">
+                <span className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
                   ShopHub
                 </span>
               </Link>
@@ -115,10 +131,11 @@ export default function Home() {
               </nav>
             </div>
             <div className="flex items-center">
+              <ThemeToggle />
               <div className="relative">
                 <Button
                   variant="ghost"
-                  className="p-2 text-gray-600 bg-transparent"
+                  className="p-2 text-gray-600 dark:text-gray-300 bg-transparent"
                   aria-label="Carrinho"
                 >
                   <ShoppingBag className="size-6" />
@@ -131,7 +148,7 @@ export default function Home() {
               </div>
               <Button
                 variant="ghost"
-                className="p-2 text-gray-600 bg-transparent"
+                className="p-2 text-gray-600 dark:text-gray-300 bg-transparent"
                 aria-label="Perfil"
               >
                 <CircleUserRound className="size-6" />
@@ -141,7 +158,7 @@ export default function Home() {
                   <SheetTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none"
+                      className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none"
                       aria-label="Expandir"
                     >
                       <Menu className="size-5" />
@@ -200,8 +217,8 @@ export default function Home() {
               onClick={() => setSelectedCategory(category)}
               className={`px-4 py-2 text-sm font-medium rounded-full whitespace-nowrap ${
                 selectedCategory === category
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-indigo-600 text-white hover:bg-indigo-700"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
             >
               {category}
@@ -212,7 +229,7 @@ export default function Home() {
 
       {/* Product Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
           {selectedCategory === "Todos"
             ? "Produtos em Destaque"
             : selectedCategory}
@@ -221,10 +238,10 @@ export default function Home() {
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="relative h-64 bg-gray-200">
-                <div className="w-full h-full flex items-center justify-center text-gray-500">
+              <div className="relative h-64 bg-gray-200 dark:bg-gray-700">
+                <div className="w-full h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
                   {product.image ? (
                     <div className="relative w-full h-full">
                       <Image
@@ -240,41 +257,41 @@ export default function Home() {
                   )}
                 </div>
                 <div className="absolute top-2 right-2">
-                  <button className="p-2 rounded-full bg-white text-gray-900 hover:text-indigo-600 focus:outline-none shadow-sm">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
-                  </button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="p-2 rounded-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-purple-800 dark:hover:text-purple-400"
+                          aria-label="Adicionar a lista de desejos"
+                        >
+                          <Heart />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Adicionar aos favoritos</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </div>
               </div>
               <div className="p-4">
-                <span className="text-sm text-indigo-600 font-medium">
+                <span className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
                   {product.category}
                 </span>
-                <h3 className="mt-1 text-lg font-medium text-gray-900">
+                <h3 className="mt-1 text-lg font-medium text-gray-900 dark:text-white">
                   {product.name}
                 </h3>
-                <p className="mt-1 text-xl font-bold text-gray-900">
-                  ${product.price.toFixed(2)}
+                <p className="mt-1 text-xl font-bold text-gray-900 dark:text-white">
+                  {formatCurrency(product.price)}
                 </p>
                 <div className="mt-4">
-                  <button
+                  <Button
                     onClick={addToCart}
-                    className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                   >
                     Adicionar ao Carrinho
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -283,78 +300,39 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <div className="bg-white">
+      <div className="bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mx-auto">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-                  />
-                </svg>
+                <Truck />
               </div>
-              <h3 className="mt-4 text-lg font-medium text-gray-900">
+              <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
                 Frete Grátis
               </h3>
-              <p className="mt-2 text-base text-gray-500">
+              <p className="mt-2 text-base text-gray-500 dark:text-gray-400">
                 Frete grátis em todas as compras acima de R$ 150.
               </p>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mx-auto">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <CircleCheckBig />
               </div>
-              <h3 className="mt-4 text-lg font-medium text-gray-900">
+              <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
                 Garantia de Qualidade
               </h3>
-              <p className="mt-2 text-base text-gray-500">
+              <p className="mt-2 text-base text-gray-500 dark:text-gray-400">
                 Se não estiver satisfeito, devolvemos o seu dinheiro.
               </p>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white mx-auto">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <Clock />
               </div>
-              <h3 className="mt-4 text-lg font-medium text-gray-900">
+              <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
                 Suporte 24/7
               </h3>
-              <p className="mt-2 text-base text-gray-500">
+              <p className="mt-2 text-base text-gray-500 dark:text-gray-400">
                 Nossa equipe de suporte sempre estará disponível para você.
               </p>
             </div>
