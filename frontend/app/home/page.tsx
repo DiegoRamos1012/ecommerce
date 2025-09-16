@@ -37,56 +37,56 @@ const products = [
     id: 1,
     name: "Mochila de viagem",
     price: 89.99,
-    image: "https://placehold.co/600x400/indigo/white?text=Backpack",
+    image: "https://picsum.photos/200/200?random=1",
     category: "Acessórios",
   },
   {
     id: 2,
     name: "Fone de ouvido sem fio",
     price: 129.99,
-    image: "https://placehold.co/600x400/indigo/white?text=Headphones",
+    image: "https://picsum.photos/200/200?random=2",
     category: "Eletrônicos",
   },
   {
     id: 3,
     name: "Smart Watch",
     price: 199.99,
-    image: "https://placehold.co/600x400/indigo/white?text=SmartWatch",
+    image: "https://picsum.photos/200/200?random=3",
     category: "Eletrônicos",
   },
   {
     id: 4,
     name: "Tênis de corrida",
     price: 79.99,
-    image: "https://placehold.co/600x400/indigo/white?text=Shoes",
+    image: "https://picsum.photos/200/200?random=4",
     category: "Calçados",
   },
   {
     id: 5,
     name: "Camiseta",
     price: 24.99,
-    image: "https://placehold.co/600x400/indigo/white?text=TShirt",
+    image: "https://picsum.photos/200/200?random=5",
     category: "Moda",
   },
   {
     id: 6,
     name: "Óculos de Sol",
     price: 59.99,
-    image: "https://placehold.co/600x400/indigo/white?text=Sunglasses",
+    image: "https://picsum.photos/200/200?random=6",
     category: "Acessórios",
   },
   {
     id: 7,
     name: "Abajur de mesa",
     price: 39.99,
-    image: "https://placehold.co/600x400/indigo/white?text=Lamp",
+    image: "https://picsum.photos/200/200?random=7",
     category: "Lar",
   },
   {
     id: 8,
     name: "Jaqueta de couro",
     price: 69.99,
-    image: "https://placehold.co/600x400/indigo/white?text=Jacket",
+    image: "https://picsum.photos/200/200?random=8",
     category: "Moda",
   },
 ];
@@ -227,7 +227,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Product Grid */}
+      {/* Seção de produtos */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
           {selectedCategory === "Todos"
@@ -299,7 +299,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Features Section */}
+      {/* Seção de Qualidades */}
       <div className="bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
