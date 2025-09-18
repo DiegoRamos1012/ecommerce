@@ -28,6 +28,7 @@ import {
   Heart,
   Menu,
   ShoppingBag,
+  ShoppingCart,
   Truck,
 } from "lucide-react";
 import { formatCurrency } from "@/utils/format";
@@ -35,70 +36,63 @@ import { formatCurrency } from "@/utils/format";
 const products = [
   {
     id: 1,
-    name: "Mochila de viagem",
-    price: 89.99,
-    image: "https://picsum.photos/200/200?random=1",
-    category: "Acessórios",
+    name: "Nintendo Switch 2",
+    price: 4184.99,
+    image: "/images/Nintendo Switch 2.png",
+    category: "Nintendo",
   },
   {
     id: 2,
-    name: "Fone de ouvido sem fio",
-    price: 129.99,
-    image: "https://picsum.photos/200/200?random=2",
-    category: "Eletrônicos",
+    name: "Playstation 5 Slim",
+    price: 3579.57,
+    image: "/images/Playstation 5.jpg",
+    category: "Playstation",
   },
   {
     id: 3,
-    name: "Smart Watch",
-    price: 199.99,
-    image: "https://picsum.photos/200/200?random=3",
-    category: "Eletrônicos",
+    name: "Xbox Series X",
+    price: 4065.99,
+    image: "/images/Xbox Series X.jpg",
+    category: "Xbox",
   },
   {
     id: 4,
-    name: "Tênis de corrida",
-    price: 79.99,
-    image: "https://picsum.photos/200/200?random=4",
-    category: "Calçados",
-  },
-  {
-    id: 5,
-    name: "Camiseta",
-    price: 24.99,
-    image: "https://picsum.photos/200/200?random=5",
-    category: "Moda",
-  },
-  {
-    id: 6,
-    name: "Óculos de Sol",
-    price: 59.99,
-    image: "https://picsum.photos/200/200?random=6",
+    name: "Headset Gamer Razer Kraken",
+    price: 381.63,
+    image: "/images/Headset Razer Kraken.jpg",
     category: "Acessórios",
   },
   {
+    id: 5,
+    name: "Playstation 4 1TB",
+    price: 2199.99,
+    image: "/images/Playstation 4.jpg",
+    category: "Playstation",
+  },
+  {
+    id: 6,
+    name: "Xbox One S",
+    price: 2199.99,
+    image: "/images/Xbox One S.webp",
+    category: "Xbox",
+  },
+  {
     id: 7,
-    name: "Abajur de mesa",
-    price: 39.99,
-    image: "https://picsum.photos/200/200?random=7",
-    category: "Lar",
+    name: "Nintendo Switch OLED",
+    price: 2199.99,
+    image: "/images/Nintendo Switch OLED.webp",
+    category: "Nintendo",
   },
   {
     id: 8,
     name: "Jaqueta de couro",
-    price: 69.99,
-    image: "https://picsum.photos/200/200?random=8",
-    category: "Moda",
+    price: 449.99,
+    image: "/images/Controle Dualsense - Playstation 5.jpg",
+    category: "Playstation",
   },
 ];
 
-const categories = [
-  "Todos",
-  "Moda",
-  "Eletrônicos",
-  "Acessórios",
-  "Calçados",
-  "Lar",
-];
+const categories = ["Todos", "Playstation", "Xbox", "Nintendo", "Acessórios"];
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
@@ -132,7 +126,7 @@ export default function Home() {
             </div>
             <div className="flex items-center">
               <ThemeToggle />
-              <div className="relative">
+              <div className="relative ml-3">
                 <Button
                   variant="ghost"
                   className="p-2 text-gray-600 dark:text-gray-300 bg-transparent"
@@ -190,7 +184,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-90" />
         <div className="relative max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
-            Coleção de Primavera e Verão 2025/2026 mas com preço de 2024
+            Promoção Gamer 2025/2026 cheio de imposto kkkkkk faz o L
           </h1>
           <p className="mt-4 max-w-xl mx-auto text-xl text-white">
             Descubra as últimas tendências com até 50% de desconto do ano de
@@ -229,7 +223,7 @@ export default function Home() {
 
       {/* Seção de produtos */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
           {selectedCategory === "Todos"
             ? "Produtos em Destaque"
             : selectedCategory}
@@ -290,6 +284,7 @@ export default function Home() {
                     onClick={addToCart}
                     className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                   >
+                    <ShoppingCart />
                     Adicionar ao Carrinho
                   </Button>
                 </div>
