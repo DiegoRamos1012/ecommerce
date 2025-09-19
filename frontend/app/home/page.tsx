@@ -85,7 +85,7 @@ const products = [
   },
   {
     id: 8,
-    name: "Jaqueta de couro",
+    name: "Controle zem fio Dualsense",
     price: 449.99,
     image: "/images/Controle Dualsense - Playstation 5.jpg",
     category: "Playstation",
